@@ -14,7 +14,8 @@ const devConfig = `postgresql://${process.env.PG_USER}:${process.env.PG_PASSWORD
 const proConfig = process.env.DATABASE_URL; //heroku addons
 
 let pool = new Pool({
-  connectionString: devConfig,
+  connectionString:
+    process.env.NODE_ENV === "production" ? proConfig : devConfig,
 });
 
 module.exports = pool;

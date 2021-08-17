@@ -1,14 +1,14 @@
 const express = require("express");
 const app = express();
-
 const path = require("path");
+
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 } else if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
+  app.use(express.static(path.join(__dirname, "../client/build")));
 }
+
 const PORT = process.env.PORT || 3005;
-const morgan = require("morgan");
 const db = require("./db/index");
 const cors = require("cors");
 

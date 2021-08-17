@@ -18,4 +18,13 @@ let pool = new Pool({
     process.env.NODE_ENV === "production" ? proConfig : devConfig,
 });
 
+if (process.env.NODE_ENV === "production") {
+  pool = {
+    ...pool,
+    ssl: {
+      rejectUnauthorized: false,
+    },
+  };
+}
+
 module.exports = pool;

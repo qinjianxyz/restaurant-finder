@@ -1,5 +1,8 @@
+const path = require("path");
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
+} else if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
 }
 const PORT = process.env.PORT || 3005;
 const express = require("express");
@@ -134,4 +137,8 @@ app.post("/restaurants/:id/addReview", async (req, res) => {
 // Server Listner
 app.listen(PORT, () => {
   console.log(`Server is listening on ${PORT}`);
+});
+
+app.get("*", (req, res) => {
+  res.sendFile("client/build/index.html");
 });

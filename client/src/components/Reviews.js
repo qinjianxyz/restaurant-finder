@@ -1,16 +1,18 @@
 import React from "react";
 import StarRating from "./StarRating";
 import RestaurantFinder from "../api/RestaurantFinder";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
 
 const Reviews = ({ restaurantID, reviews }) => {
   const history = useHistory();
+  const location = useLocation();
 
   const handleDelete = async (e, id) => {
+    e.preventDefault();
     try {
-      e.preventDefault();
       await RestaurantFinder.delete(`/reviews/${id}`);
-      history.go(0);
+      history.push("/");
+      history.push(location.pathname);
     } catch (error) {
       console.log(error);
     }

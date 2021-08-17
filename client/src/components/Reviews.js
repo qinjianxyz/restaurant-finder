@@ -5,6 +5,7 @@ import RestaurantFinder from "../api/RestaurantFinder";
 const Reviews = ({ restaurantID, reviews }) => {
   const handleDelete = async (e, id) => {
     try {
+      e.preventDefault();
       await RestaurantFinder.delete(`/reviews/${id}`);
       window.location.reload();
     } catch (error) {

@@ -9,6 +9,7 @@ const AddReview = () => {
   const [rating, SetRating] = useState("Rating");
 
   const handleSubmitReview = async (e) => {
+    e.preventDefault();
     try {
       if (!name || !reviewText || rating === "Rating") {
         return;

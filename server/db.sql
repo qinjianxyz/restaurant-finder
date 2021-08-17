@@ -21,7 +21,3 @@ CREATE TABLE reviews (
     review TEXT NOT NULL,
     rating INT NOT NULL check(rating >= 1 AND rating <= 5)
 );
-
-INSERT INTO restaurants (name, location, price_range) values('McDonalds', 'NY', 3);
-INSERT INTO restaurants (name, location, price_range) values('PizzaHut', 'Vegas', 2);
-INSERT INTO reviews (name, review, rating) values ('Jian', 'Food was good', 4);

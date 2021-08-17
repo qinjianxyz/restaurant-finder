@@ -49,7 +49,7 @@ const RestaurantList = () => {
   };
 
   const handleRestaurantSelect = (id) => {
-    history.push(`/restaurants/${id}`);
+    history.push(`/restaurants/info/${id}`);
   };
 
   return (

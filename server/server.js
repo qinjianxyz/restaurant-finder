@@ -1,19 +1,16 @@
 const express = require("express");
 const app = express();
 const path = require("path");
-
-if (process.env.NODE_ENV !== "production") {
-  require("dotenv").config();
-} else if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../client/build")));
-}
-
 const PORT = process.env.PORT || 3005;
 const db = require("./db/index");
 const cors = require("cors");
 
 app.use(cors());
 app.use(express.json());
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../client/build")));
+}
 
 // Get All Restaurants
 app.get("/restaurants", async (req, res) => {

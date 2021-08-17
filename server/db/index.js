@@ -1,5 +1,4 @@
 const Pool = require("pg").Pool;
-
 require("dotenv").config();
 
 // const devConfig = {
@@ -18,14 +17,5 @@ let pool = new Pool({
   connectionString:
     process.env.NODE_ENV === "production" ? proConfig : devConfig,
 });
-
-if (process.env.NODE_ENV === "production") {
-  pool = {
-    ...pool,
-    ssl: {
-      rejectUnauthorized: false,
-    },
-  };
-}
 
 module.exports = pool;

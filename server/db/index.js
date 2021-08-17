@@ -1,24 +1,31 @@
-const { Pool } = require("pg");
+const Pool = require("pg").Pool;
+
 require("dotenv").config();
-const devConfig = {
-  user: process.env.PG_USER,
-  password: process.env.PG_PASSWORD,
-  host: process.env.PG_HOST,
-  database: process.env.PG_DATABASE,
-  port: process.env.PG_PORT,
-};
 
-const proConfig = {
-  connectionString: process.env.DATABASE_URL, //heroku addons
-  ssl: {
-    rejectUnauthorized: false,
-  },
-};
+// const devConfig = {
+//   user: process.env.PG_USER,
+//   password: process.env.PG_PASSWORD,
+//   host: process.env.PG_HOST,
+//   database: process.env.PG_DATABASE,
+//   port: process.env.PG_PORT,
+// };
 
-const pool = new Pool(
-  process.env.NODE_ENV === "production" ? proConfig : devConfig
-);
+const devConfig = `postgresql://${process.env.PG_USER}:${process.env.PG_PASSWORD}@${process.env.PG_HOST}:${process.env.PG_PORT}/${process.env.PG_DATABASE}`;
 
-module.exports = {
-  query: (text, params) => pool.query(text, params),
-};
+const proConfig = process.env.DATABASE_URL; //heroku addons
+
+const pool = new Pool({
+  connectionString:
+    process.env.NODE_ENV === "production" ? proConfig : devConfig,
+});
+
+if (process.env.NODE_ENV === "production") {
+  pool = {
+    ...pool,
+    ssl: {
+      rejectUnauthorized: false,
+    },
+  };
+}
+
+module.exports = pool;

@@ -4,7 +4,7 @@
 -- create database name
 -- drop database name
 -- view all tables \d
--- view individual table /d table name
+-- view individual table \d table name
 
 
 CREATE TABLE restaurants (

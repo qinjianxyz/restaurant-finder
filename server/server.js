@@ -139,7 +139,3 @@ app.post("/restaurants/:id/addReview", async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is listening on ${PORT}`);
 });
-
-app.get("*", (req, res) => {
-  res.sendFile("client/build/index.html");
-});
